@@ -359,21 +359,85 @@
   .img-upload-btn svg { flex-shrink: 0; }
   .img-file-input { display: none; }
 
-  /* Edit mode toggle */
-  .edit-bar {
-    background: #fffbe6;
-    border-bottom: 1px solid #e8d86a;
-    text-align: center;
-    padding: 0.5rem 1rem;
-    font-size: 0.85rem;
-    font-family: Arial, sans-serif;
-    color: #7a6800;
-  }
-  .edit-bar label { cursor: pointer; display: inline-flex; align-items: center; gap: 6px; }
   .upload-btns { display: none; }
   body.edit-mode .upload-btns { display: inline-flex; }
 
-  /* ── SPONSORS ── */
+  /* ── REDIGER-KNAP (flydende, nederst til højre) ── */
+  .edit-fab {
+    position: fixed;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: var(--green-bg);
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+    opacity: 0.45;
+    transition: opacity 0.2s, background 0.2s;
+    z-index: 200;
+  }
+  .edit-fab:hover { opacity: 1; }
+  .edit-fab.active { background: var(--green-mid); opacity: 1; }
+  .edit-fab title { display: none; }
+
+  /* ── ADGANGSKODE MODAL ── */
+  .pw-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.45);
+    z-index: 999;
+    align-items: center;
+    justify-content: center;
+  }
+  .pw-overlay.open { display: flex; }
+  .pw-box {
+    background: var(--white);
+    border-radius: 3px;
+    padding: 2rem;
+    width: 100%;
+    max-width: 340px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+    font-family: Arial, sans-serif;
+  }
+  .pw-box h3 {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+    color: var(--green-dark);
+    font-family: Georgia, serif;
+  }
+  .pw-box p { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem; }
+  .pw-box input[type=password] {
+    width: 100%;
+    padding: 0.6rem 0.75rem;
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    font-size: 1rem;
+    margin-bottom: 0.75rem;
+    outline: none;
+  }
+  .pw-box input[type=password]:focus { border-color: var(--green-mid); }
+  .pw-box .pw-btns { display: flex; gap: 0.5rem; }
+  .pw-box button {
+    flex: 1;
+    padding: 0.55rem;
+    font-size: 0.9rem;
+    font-family: Arial, sans-serif;
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+  }
+  .pw-btn-ok { background: var(--green-mid); color: #fff; }
+  .pw-btn-ok:hover { background: var(--green-dark); }
+  .pw-btn-cancel { background: #eee; color: var(--text); }
+  .pw-btn-cancel:hover { background: #ddd; }
+  .pw-error { color: #c00; font-size: 0.82rem; margin-top: 0.4rem; display: none; }
   .sponsors {
     margin-top: 3rem;
     padding-top: 2rem;
@@ -504,11 +568,25 @@
   </ul>
 </nav>
 
-<div class="edit-bar">
-  <label>
-    <input type="checkbox" id="editToggle" onchange="toggleEdit(this)">
-    ✏️ Redigeringstilstand – tilføj/fjern billeder
-  </label>
+<button class="edit-fab" id="editFab" onclick="toggleEdit()" title="Redigeringstilstand">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+    <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+  </svg>
+</button>
+
+<!-- Adgangskode modal -->
+<div class="pw-overlay" id="pwOverlay">
+  <div class="pw-box">
+    <h3>🔒 Administratoradgang</h3>
+    <p>Indtast adgangskoden for at aktivere redigeringstilstand.</p>
+    <input type="password" id="pwInput" placeholder="Adgangskode" onkeydown="if(event.key==='Enter')pwConfirm()">
+    <div class="pw-error" id="pwError">Forkert adgangskode – prøv igen.</div>
+    <div class="pw-btns">
+      <button class="pw-btn-ok" onclick="pwConfirm()">Log ind</button>
+      <button class="pw-btn-cancel" onclick="pwCancel()">Annuller</button>
+    </div>
+  </div>
 </div>
 
 <main>
@@ -831,8 +909,41 @@ function showPage(id) {
   return false;
 }
 
-function toggleEdit(cb) {
-  document.body.classList.toggle('edit-mode', cb.checked);
+// ── ADGANGSKODE til redigeringstilstand ──
+var ADMIN_PASSWORD = 'byfest2026';
+var editModeActive = false;
+
+function toggleEdit() {
+  if (!editModeActive) {
+    document.getElementById('pwOverlay').classList.add('open');
+    document.getElementById('pwInput').value = '';
+    document.getElementById('pwError').style.display = 'none';
+    setTimeout(function() { document.getElementById('pwInput').focus(); }, 50);
+  } else {
+    editModeActive = false;
+    document.body.classList.remove('edit-mode');
+    document.getElementById('editFab').classList.remove('active');
+    document.getElementById('editFab').title = 'Redigeringstilstand';
+  }
+}
+
+function pwConfirm() {
+  var val = document.getElementById('pwInput').value;
+  if (val === ADMIN_PASSWORD) {
+    document.getElementById('pwOverlay').classList.remove('open');
+    editModeActive = true;
+    document.body.classList.add('edit-mode');
+    document.getElementById('editFab').classList.add('active');
+    document.getElementById('editFab').title = 'Afslut redigeringstilstand';
+  } else {
+    document.getElementById('pwError').style.display = 'block';
+    document.getElementById('pwInput').value = '';
+    document.getElementById('pwInput').focus();
+  }
+}
+
+function pwCancel() {
+  document.getElementById('pwOverlay').classList.remove('open');
 }
 
 // ── SPONSORER – bygges dynamisk og deles på tværs af alle sider ──
