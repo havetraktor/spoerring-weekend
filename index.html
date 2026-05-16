@@ -162,6 +162,14 @@
     color: var(--green-dark);
     border-bottom-color: var(--green-mid);
   }
+  nav ul li a#nav-madbillet {
+    color: var(--green-dark);
+    font-weight: bold;
+  }
+  nav ul li a#nav-madbillet:hover {
+    background: var(--green-light);
+    border-bottom-color: var(--green-mid);
+  }
 
   /* ── MAIN CONTENT ── */
   main { max-width: 780px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
@@ -386,6 +394,85 @@
   .edit-fab.active { background: var(--green-mid); opacity: 1; }
   .edit-fab title { display: none; }
 
+  /* ── HJÆLP-SIDE ── */
+  .help-section {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--green-mid);
+    border-radius: 0 2px 2px 0;
+    padding: 2rem;
+    margin-bottom: 1.5rem;
+    display: flex;
+    gap: 1.5rem;
+    align-items: flex-start;
+  }
+  .help-icon {
+    font-size: 2.2rem;
+    line-height: 1;
+    flex-shrink: 0;
+    margin-top: 0.2rem;
+  }
+  .help-body { flex: 1; }
+  .help-body h2 {
+    font-size: 1.3rem;
+    font-weight: 400;
+    color: var(--green-dark);
+    margin-bottom: 0.75rem;
+  }
+  .help-body p {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    margin-bottom: 1rem;
+  }
+  .help-list {
+    list-style: none;
+    margin: 0 0 1.25rem 0;
+    padding: 0;
+  }
+  .help-list li {
+    font-size: 0.92rem;
+    color: var(--text-muted);
+    padding: 0.3rem 0 0.3rem 1.4rem;
+    position: relative;
+    border-bottom: 1px solid var(--green-light);
+  }
+  .help-list li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: var(--green-mid);
+    font-weight: bold;
+  }
+  .help-contact {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 1rem;
+  }
+  .help-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 0.55rem 1.1rem;
+    background: var(--green-mid);
+    color: #fff;
+    font-family: Arial, sans-serif;
+    font-size: 0.88rem;
+    border-radius: 2px;
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+  .help-btn:hover { background: var(--green-dark); color: #fff; }
+  .help-btn-outline {
+    background: transparent;
+    color: var(--green-dark);
+    border: 1.5px solid var(--green-mid);
+  }
+  .help-btn-outline:hover { background: var(--green-light); color: var(--green-dark); }
+  @media (max-width: 520px) {
+    .help-section { flex-direction: column; gap: 0.75rem; }
+  }
+
   /* ── ADGANGSKODE MODAL ── */
   .pw-overlay {
     display: none;
@@ -553,18 +640,20 @@
   <p class="dates">Torsdag 18. juni – Tirsdag 23. juni</p>
   <div class="header-btns">
     <a class="btn btn-solid" href="https://sporring-byfest.unioo.info" target="_blank">Køb madbillet</a>
-    <a class="btn" href="#" onclick="showPage('hjaelp')">Hjælp byfesten</a>
+    <a class="btn" href="#" onclick="showPage('hjaelp'); return false;">Hjælp byfesten</a>
   </div>
 </header>
 
 <nav>
   <ul>
-    <li><a href="#" onclick="showPage('hjem')" class="active" id="nav-hjem">Hjem</a></li>
-    <li><a href="#" onclick="showPage('torsdag')" id="nav-torsdag">Torsdag</a></li>
-    <li><a href="#" onclick="showPage('fredag')" id="nav-fredag">Fredag</a></li>
-    <li><a href="#" onclick="showPage('lordag')" id="nav-lordag">Lørdag</a></li>
-    <li><a href="#" onclick="showPage('sondag')" id="nav-sondag">Søndag</a></li>
-    <li><a href="#" onclick="showPage('tirsdag')" id="nav-tirsdag">Tirsdag</a></li>
+    <li><a href="#" onclick="showPage('hjem'); return false;" class="active" id="nav-hjem">Hjem</a></li>
+    <li><a href="#" onclick="showPage('torsdag'); return false;" id="nav-torsdag">Torsdag</a></li>
+    <li><a href="#" onclick="showPage('fredag'); return false;" id="nav-fredag">Fredag</a></li>
+    <li><a href="#" onclick="showPage('lordag'); return false;" id="nav-lordag">Lørdag</a></li>
+    <li><a href="#" onclick="showPage('sondag'); return false;" id="nav-sondag">Søndag</a></li>
+    <li><a href="#" onclick="showPage('tirsdag'); return false;" id="nav-tirsdag">Tirsdag</a></li>
+    <li><a href="#" onclick="showPage('hjaelp'); return false;" id="nav-hjaelp">Hjælp os</a></li>
+    <li><a href="https://sporring-byfest.unioo.info" target="_blank" id="nav-madbillet" style="color: var(--green-dark); font-weight: bold;">Køb madbillet</a></li>
   </ul>
 </nav>
 
@@ -623,29 +712,29 @@
     </div>
 
     <div class="event">
-      <div class="event-time">Torsdag 18. juni · kl. 19.00</div>
-      <h3>Kirkekoncert</h3>
-      <p>Weekenden sparkes i gang med koncert i Spørring Kirke.</p>
+      <div class="event-time">Torsdag 18. juni · kl. 19.30</div>
+      <h3>Kirkekoncert med Local Vocal</h3>
+      <p>30 a cappella-sangere fylder Spørring Kirke med arrangementer af Leonard Cohen, Adele, Dua Lipa og flere.</p>
     </div>
     <div class="event">
       <div class="event-time">Fredag 19. juni · kl. 16.30</div>
-      <h3>Teltet åbner – fællesspisning og Pianobar</h3>
-      <p>Hoppeborg, grill, quizshow og livemusik med Hedeslag kl. 22.</p>
+      <h3>Teltet åbner – Pianobar og Hedeslag</h3>
+      <p>Bjarne Langhoff ved klaveret fra kl. 20, og Hedeslag fyrer den af med nye og gamle hits fra kl. 22.</p>
     </div>
     <div class="event">
       <div class="event-time">Lørdag 20. juni · kl. 11.00</div>
       <h3>Fuld dag med aktiviteter</h3>
-      <p>Klovneshow, loppemarked, anderæs, stor fællesbuffet kl. 18 og musik i teltet kl. 21.30.</p>
+      <p>En dejlig dag der starter med klovneshow og fortsætter med hoppeborg, ansigtsmaling, ponyridning og det store anderæs i åen kl. 17. Om aftenen er der fællesspisning, quizshow og levende musik.</p>
     </div>
     <div class="event">
       <div class="event-time">Søndag 21. juni · kl. 9.00</div>
-      <h3>Morgenkaffe, gudstjeneste og SkralleBang</h3>
-      <p>Gaderundbold, kaffe og kage – weekenden afsluttes kl. 15.30.</p>
+      <h3>Morgenkaffe, gudstjeneste og SkralleBang kl. 11.30</h3>
+      <p>Eftermiddagen byder på årets store gadeturnering i rundbold — saml holdet og gør klar til kamp! Weekenden rundes af med kaffe og kage fra Husmoderforeningen kl. 14.</p>
     </div>
     <div class="event">
-      <div class="event-time">Tirsdag 23. juni · kl. 19.30</div>
+      <div class="event-time">Tirsdag 23. juni · kl. 18.30</div>
       <h3>Skt. Hans på Grøntoppen</h3>
-      <p>Gratis snobrød til børnene. Øl og vand kan købes for 10 kr.</p>
+      <p>Fakkeloptog fra Fælleshuset kl. 18.30, båltale kl. 19.30 og bålet tændes kl. 20. Øl og vand til 10 kr.</p>
     </div>
 
     <div class="sponsors">
@@ -665,9 +754,12 @@
     </div>
 
     <div class="event">
-      <div class="event-time">Kl. 19.00</div>
-      <h3>Kirkekoncert</h3>
-      <p>Som optakt til byfesten er der koncert i Spørring Kirke torsdag aften. Dørene åbner kl. 18.30.</p>
+      <div class="event-time">Kl. 19.30</div>
+      <h3>Kirkekoncert med Local Vocal</h3>
+      <p>Local Vocal er et Aarhus-baseret a cappella-kor med 30 sangere under ledelse af Philip Eick. Koret er kendt for deres virale 90's Dance Medley med over 7,7 millioner YouTube-visninger og har optrådt internationalt i bl.a. Tyskland, Holland, Skotland og på fransk nationalt TV.</p>
+      <p>Til koncerten i Spørring Kirke byder de på et stemningsfuldt forårsprogram med arrangementer af Leonard Cohen, Adele, Dua Lipa og flere – hvor stemmer alene fylder kirkerummet med varme, rytme og liv.</p>
+      <p>Dørene åbner kl. 18.30.</p>
+      <a class="cta" href="https://www.youtube.com/results?search_query=local+vocal+aarhus+90s+dance+medley" target="_blank" rel="noopener">Se dem på YouTube →</a>
     </div>
 
     <div class="sponsors">
@@ -687,32 +779,33 @@
 
     <div class="event">
       <div class="event-time">Kl. 16.30</div>
-      <h3>Teltet åbner</h3>
-      <p>Teltet og baren åbner. Hoppeborgen pustes op i baghaven – perfekt til en fredagsøl mens ungerne leger.</p>
+      <h3>Teltet og baren åbner</h3>
+      <p>Baren slår dørene op og hoppeborgen pustes op i baghaven. Snup en kold øl, find en stol og lad fredagen begynde — ungerne klarer resten selv.</p>
     </div>
 
     <div class="event">
       <div class="event-time">Kl. 17.30</div>
       <h3>Grillen er klar</h3>
-      <p>Medbring din egen madkurv eller bestil mad hos Byfesten. Der er mulighed for at grille på opstillede grill.</p>
+      <p>Medbring din egen madkurv og brug de opstillede grill, snup en pølse fra baren — eller bestil i god tid hos Spørring Pizza og hent den klar til aftenen. Det handler om hyggen, ikke menuen.</p>
     </div>
 
     <div class="event">
       <div class="event-time">Kl. 20.00</div>
       <h3>Pianobar og hygge i teltet</h3>
-      <p>Slap af med god stemning og livemusik fra pianobaren.</p>
+      <p>Den fantastiske Bjarne Langhoff er tilbage! En mester i god stemning, der spiller sig ind under huden på enhver. Perfekt til at varme op til resten af aftenen.</p>
     </div>
 
     <div class="event">
       <div class="event-time">Kl. 22.00</div>
-      <h3>Hedeslag – Livemusik i teltet</h3>
-      <p>Hedeslag spiller nyt og gammelt, tykt og tyndt – og helt sikkert noget der kan skråles med på. Gratis arrangement!</p>
+      <h3>Hedeslag · Livemusik i teltet</h3>
+      <p>Originalerne er tilbage og fyrer den af med masser af både nye og gamle hits. Hedeslag er en fast favorit til byfesten — og med god grund. Kom tidligt og sikr dig en god plads. Gratis arrangement!</p>
       <a class="cta" href="http://www.hedeslag.dk" target="_blank">hedeslag.dk →</a>
     </div>
 
     <div class="event">
       <div class="event-time">Kl. 01.00</div>
       <h3>Teltet lukker</h3>
+      <p>God nat — vi ses igen i morgen!</p>
     </div>
 
     <div class="sponsors">
@@ -733,55 +826,56 @@
     <div class="event">
       <div class="event-time">Kl. 11.00</div>
       <h3>Teltet og baren åbner</h3>
-      <p>Øl, soda, pølser, popcorn, slush ice m.m. – og så starter aktiviteterne!</p>
+      <p>Øl, sodavand, pølser, popcorn, slush ice m.m. — og så er lørdagen i gang! Find en plads i teltet eller nyd solen udenfor mens aktiviteterne folder sig ud.</p>
     </div>
 
     <div class="event">
       <div class="event-time">Kl. 11.00</div>
-      <h3>Trylle- og Klovneshow med Alfredo</h3>
-      <p>Alfredo er fyldt med energi og spas – ballonsværd, blomster, kæmpehjerter og tryllerier. Derefter gratis is til børnene!</p>
+      <h3>Trylle- og klovneshow med Alfredo</h3>
+      <p>Alfredo er fyldt med energi, spas og overraskelser — ballonsværd, blomster, kæmpehjerter og tryllerier der får selv de mest blaserte børn til at gabe af forundring. Derefter gratis is til børnene!</p>
     </div>
 
     <div class="event">
       <div class="event-time">Kl. 12.00</div>
-      <h3>Hoppeborg, ansigtsmaling, fiskedam og loppemarked</h3>
-      <p>Hoppeborgen tændes og der er masser af aktiviteter i baghaven. Loppemarked for alle!</p>
+      <h3>Hoppeborg tændes</h3>
+      <p>Ansigtsmaling, fiskedam, loppemarked og meget mere. Baghaven summer af liv hele dagen — der er nok at se til for børn i alle aldre.</p>
     </div>
 
     <div class="event">
       <div class="event-time">Kl. 14.00</div>
-      <h3>Amerikansk lotteri – Kaffe og kage</h3>
-      <p>Kig forbi skolegården til kaffe, kage og fine præmier i lotteriet.</p>
+      <h3>Masser af aktiviteter</h3>
+      <p>Lotteri, ponyridning, loppemarked, traktor-besøg m.m. En eftermiddag der byder på noget for enhver smag — og en god undskyldning for at blive hængende i baghaven.</p>
     </div>
 
     <div class="event">
       <div class="event-time">Kl. 17.00</div>
       <h3>Det store Anderæs i Spørring Å</h3>
-      <p>Årets højdepunkt! Adrenalinen pumper når ænderne hopper afsted. Det vilde vesten – ingen regler!</p>
+      <p>Årets absolutte højdepunkt! Hundredvis af plastikænder kastes i åen — hvem ender i mål først? Spænding, grin og jubel garanteret. Saml familien ved bredden i god tid!</p>
     </div>
 
     <div class="event">
       <div class="event-time">Kl. 18.00</div>
       <h3>Stor fælles buffet i teltet</h3>
-      <p>Billetter købes fra 2. juni kl. 14.00. Der er begrænsede pladser – skynd dig!</p>
+      <p>En af weekendens store traditioner — fællesspisning i teltet med et festligt bord for alle. Køb billetter fra 8. juni — se mere på hjemmesiden. Der er begrænsede pladser, så skynd dig!</p>
       <a class="cta" href="https://sporring-byfest.unioo.info" target="_blank">Køb madbillet her →</a>
     </div>
 
     <div class="event">
       <div class="event-time">Kl. 19.30</div>
-      <h3>Quizshow – kom og vind over din nabo</h3>
-      <p>Kræver kun en mobiltelefon og noget godt humør.</p>
+      <h3>Quizshow — vind over din nabo</h3>
+      <p>Nu med mindst 20% nye spørgsmål! Tag et hold sammen og kæmp om æren — og måske en præmie. Kræver kun en mobiltelefon og noget godt humør.</p>
     </div>
 
     <div class="event">
       <div class="event-time">Kl. 21.30</div>
       <h3>Musik i teltet</h3>
-      <p>Aftenen afsluttes med levende musik. Gratis arrangement!</p>
+      <p>Aftenen afsluttes med levende musik mens stemningen er i top. Gratis arrangement!</p>
     </div>
 
     <div class="event">
       <div class="event-time">Kl. 01.00</div>
       <h3>Teltet lukker</h3>
+      <p>God nat — vi ses til morgenmad i morgen!</p>
     </div>
 
     <div class="sponsors">
@@ -796,50 +890,50 @@
   <div class="page" id="page-sondag">
     <div class="day-header">
       <p>Søndag 21. juni 2026</p>
-      <h2>Morgenkaffe, gudstjeneste og meget mere</h2>
+      <h2>En dejlig afslutning på weekenden</h2>
     </div>
 
     <div class="event">
       <div class="event-time">Kl. 9.00</div>
       <h3>Morgenkaffe i teltet</h3>
-      <p>Menighedsrådet byder på morgenkaffe. Smid lidt vand i hovedet og kom ned til en kop friskbrygget kaffe.</p>
+      <p>Menighedsrådet byder på kaffe og rundstykker i teltet. Den perfekte måde at starte søndagen på — kom som du er, og nyd en rolig kop kaffe inden dagens program folder sig ud.</p>
     </div>
 
     <div class="event">
       <div class="event-time">Kl. 10.00</div>
       <h3>Familiegudstjeneste i teltet</h3>
-      <p>En tilbagevendende tradition – kom og få gang i stemmen. Du må gerne have kaffen med i "kirken".</p>
+      <p>Traditionen tro er der en uformel gudstjeneste med Jakob Kokkenborg. En hyggelig og inkluderende gudstjeneste for hele familien — du må sagtens have kaffen med ind.</p>
     </div>
 
     <div class="event">
-      <div class="event-time">Kl. 12.00</div>
+      <div class="event-time">Kl. 11.30</div>
       <h3>Børnekoncert med SkralleBang</h3>
-      <p>Gratis is til børnene! SkralleBang spiller aktive, inddragende og sjove koncerter for klodens vigtigste publikum – børn og deres voksne.</p>
+      <p>Der er endnu engang herlig stemning når SkralleBang er tilbage! De spiller aktive, inddragende og sjove koncerter for klodens vigtigste publikum — børn og deres voksne. Gratis is til børnene efter showet!</p>
       <a class="cta" href="https://www.skrallebang.dk" target="_blank">skrallebang.dk →</a>
     </div>
 
     <div class="event">
       <div class="event-time">Kl. 12.30</div>
       <h3>Hoppeborg og aktiviteter i baghaven</h3>
-      <p>Egnsarkivet åbner også kl. 12.30 – kig forbi og se den nyeste udstilling om Spørrings historie.</p>
+      <p>Baghaven åbner igen med hoppeborg og sjove aktiviteter. Egnsarkivet åbner også kl. 12.30 med en ny udstilling til byfesten — kig forbi lørdag 13–17 eller søndag 12.30–15.30.</p>
     </div>
 
     <div class="event">
       <div class="event-time">Kl. 13.00</div>
       <h3>Gadeturnering i rundbold</h3>
-      <p>Årets vigtigste kamp! Byens gader tørner sammen. Begynd allerede nu at samle dit hold!</p>
+      <p>Den super spændende dyst for både børn og voksne! Byens gader tørner sammen i årets vigtigste opgør. Saml dit hold og mød op klar til kamp — æren er på spil.</p>
     </div>
 
     <div class="event">
       <div class="event-time">Kl. 14.00</div>
       <h3>Kaffe og kage</h3>
-      <p>Husmoderforeningen har bagt kage til kaffen. Nyd det i teltet – eller udenfor hvis vejret tillader det.</p>
+      <p>Husmoderforeningen sørger for en god afslutning på byfesten med kaffe, boller og kage. En varm og hyggelig tradition der runder weekenden af på bedste vis.</p>
     </div>
 
     <div class="event">
       <div class="event-time">Kl. 15.30</div>
-      <h3>Tak for i år :-)</h3>
-      <p>Spørring Weekend 2026 slutter. Vi ses igen!</p>
+      <h3>Tak for i år</h3>
+      <p>Spørring Weekend 2026 slutter — men Skt. Hans venter allerede tirsdag den 23. juni på Grøntoppen. Vi ses!</p>
     </div>
 
     <div class="sponsors">
@@ -858,9 +952,21 @@
     </div>
 
     <div class="event">
+      <div class="event-time">Kl. 18.30</div>
+      <h3>Fakkeloptog fra Fælleshuset</h3>
+      <p>Børn og voksne samles ved Fælleshuset og går sammen med fakler op til Grøntoppen, hvor aftenen fortsætter med gratis snobrød og skumfiduser, båltale og bål. Et magisk syn og en dejlig tradition for hele familien.</p>
+    </div>
+
+    <div class="event">
       <div class="event-time">Kl. 19.30</div>
-      <h3>Skt. Hans på Grøntoppen</h3>
-      <p>Den dejlige tradition fortsætter! Arrangement for hele familien med gratis snobrød og mulighed for at købe øl og vand til 10 kr. Det er ikke områdets største bål, men til gengæld hyggeligt.</p>
+      <h3>Båltale</h3>
+      <p>Inden bålet tændes samles vi til årets båltale på Grøntoppen.</p>
+    </div>
+
+    <div class="event">
+      <div class="event-time">Kl. 20.00</div>
+      <h3>Bålet tændes</h3>
+      <p>Bålet er måske ikke det største, men til gengæld er stemningen det. Her mødes vi som by under den lyse sommeraften — og det er den slags øjeblikke, der gør Spørring til noget særligt. Øl og vand sælges til 10 kr. og kan nydes på de opstillede borde og bænke.</p>
     </div>
 
     <div class="sponsors">
@@ -875,16 +981,61 @@
   <div class="page" id="page-hjaelp">
     <div class="day-header">
       <p>Bliv en del af det</p>
-      <h2>Hjælp byfesten</h2>
+      <h2>Giv en hånd til weekenden</h2>
     </div>
 
     <div class="intro">
-      <h2>Vi har brug for dig!</h2>
-      <p>For at få det hele stablet på benene er der en gruppe frivillige der lægger stor energi i planlægningen og afviklingen. Vil du være med, er du mere end velkommen!</p>
-      <p>Flere lokale virksomheder bakker op, men vi vil meget gerne have flere til at give en hånd med i weekenden og meget gerne sponsorater fra virksomheder. Alt gør en forskel – og er der overskud, går alle penge til næste års weekend.</p>
-      <p><strong>Skriv til os i Facebook-gruppen</strong> hvis du vil hjælpe med planlægning eller andet.</p>
-      <a class="cta" href="https://www.facebook.com/groups/spoerringweekend" target="_blank">Gå til Facebook-gruppen →</a>
+      <h2>Weekenden løftes i fællesskab</h2>
+      <p>Spørring Weekend kan kun blive til virkelighed fordi byens borgere og erhvervsliv rækker ud og hjælper. Hvert bidrag — stort som lille — gør en forskel. Er der overskud, går alle penge ubeskåret til næste års weekend.</p>
     </div>
+
+    <!-- Frivillige -->
+    <div class="help-section">
+      <div class="help-icon">🙌</div>
+      <div class="help-body">
+        <h2>Vi mangler flere hænder</h2>
+        <p>Der er opgaver til alle — uanset om du kan hjælpe i et par timer eller hele weekenden. Vi finder en opgave der passer dig.</p>
+        <ul class="help-list">
+          <li>Opsætning og nedtagning af telt og udstyr</li>
+          <li>Bar og serveringsvagt</li>
+          <li>Børneaktiviteter i baghaven</li>
+          <li>Praktiske opgaver under afviklingen</li>
+          <li>Planlægning og koordinering</li>
+        </ul>
+        <div class="help-contact">
+          <a class="help-btn" href="https://www.facebook.com/groups/spoerringweekend" target="_blank" rel="noopener">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+            Skriv til os på Facebook
+          </a>
+          <a class="help-btn help-btn-outline" href="mailto:sporing.byfest@gmail.com">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,12 2,6"/></svg>
+            sporing.byfest@gmail.com
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sponsorer -->
+    <div class="help-section">
+      <div class="help-icon">🤝</div>
+      <div class="help-body">
+        <h2>Bliv sponsor</h2>
+        <p>Som sponsor støtter du direkte op om fællesskabet i Spørring. Vi sætter stor pris på alle former for støtte — fra rabatter og varedonationer til kontante sponsorater.</p>
+        <ul class="help-list">
+          <li>Dit logo på hjemmesiden og i trykt materiale</li>
+          <li>Omtale på Facebook-gruppen med over 600 medlemmer</li>
+          <li>Synlighed over for hele byens befolkning i festugen</li>
+          <li>Støtte til en lokal tradition der samler generationer</li>
+        </ul>
+        <div class="help-contact">
+          <a class="help-btn" href="mailto:sporing.byfest@gmail.com">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,12 2,6"/></svg>
+            Kontakt os om sponsorat
+          </a>
+        </div>
+      </div>
+    </div>
+
   </div>
 
 </main>
