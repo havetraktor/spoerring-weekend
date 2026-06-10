@@ -910,13 +910,25 @@
     <div class="event">
       <div class="event-time">Kl. 12.00</div>
       <h3>Hoppeborg tændes</h3>
-      <p>Ansigtsmaling, fiskedam, loppemarked og meget mere. Baghaven summer af liv hele dagen — der er nok at se til for børn i alle aldre.</p>
+      <p>Ansigtsmaling, fiskedam og meget mere. Baghaven summer af liv hele dagen — der er nok at se til for børn i alle aldre.</p>
+    </div>
+
+    <div class="event">
+      <div class="event-time">Kl. 13.30</div>
+      <h3>Eftermiddags dansefest — når det er bedst</h3>
+      <p>Susanne varmer teltet op med sjov dans og lækre rytmer — cha cha, jive, salsa, samba, merengue, vals og meget mere. Vi danser uden partner, så alle kan være med, uanset om du er 5 eller 100 år. Tag naboen, veninden eller farmor med — eller kom alene og dans sammen med os andre. Husk flade sko og afslappet tøj.</p>
+    </div>
+
+    <div class="event">
+      <div class="event-time">Kl. 14.00</div>
+      <h3>Loppemarked</h3>
+      <p>Loppemarked for både voksne og børn fra Spørring. Gør et godt fund blandt naboernes lopper, eller slå dig ned med din egen stadeplads — et hyggeligt marked midt i festen.</p>
     </div>
 
     <div class="event">
       <div class="event-time">Kl. 14.00</div>
       <h3>Masser af aktiviteter</h3>
-      <p>Lotteri, ponyridning, loppemarked, traktor-besøg m.m. En eftermiddag der byder på noget for enhver smag — og en god undskyldning for at blive hængende i baghaven.</p>
+      <p>Lotteri, ponyridning, traktor-besøg m.m. En eftermiddag der byder på noget for enhver smag — og en god undskyldning for at blive hængende i baghaven.</p>
     </div>
 
     <div class="event">
@@ -1079,9 +1091,9 @@
             <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
             Skriv til os på Facebook
           </a>
-          <a class="help-btn help-btn-outline" href="/cdn-cgi/l/email-protection#790a09160b10171e571b001f1c0a0d391e14181015571a1614">
+          <a class="help-btn help-btn-outline" href="/cdn-cgi/l/email-protection#d2a1a2bda0bbbcb5fcb0abb4b7a1a692b5bfb3bbbefcb1bdbf">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,12 2,6"/></svg>
-            <span class="__cf_email__" data-cfemail="f083809f82999e97de928996958384b0979d91999cde939f9d">[email&#160;protected]</span>
+            <span class="__cf_email__" data-cfemail="67141708150e090049051e0102141327000a060e0b4904080a">[email&#160;protected]</span>
           </a>
         </div>
       </div>
@@ -1100,7 +1112,7 @@
           <li>Støtte til en lokal tradition der samler generationer</li>
         </ul>
         <div class="help-contact">
-          <a class="help-btn" href="/cdn-cgi/l/email-protection#186b68776a71767f367a617e7d6b6c587f75797174367b7775">
+          <a class="help-btn" href="/cdn-cgi/l/email-protection#47343728352e292069253e2122343307202a262e2b6924282a">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,12 2,6"/></svg>
             Kontakt os om sponsorat
           </a>
@@ -1172,12 +1184,10 @@ function pwCancel() {
 
 // ── SPONSORER – bygges dynamisk og deles på tværs af alle sider ──
 var SPONSORS = [
-  { name: 'Nature Energy', url: 'https://nature-energy.com/dk-da/' },
-  { name: 'Ecotop',        url: 'https://ecotop.dk' },
-  { name: 'Unioo',         url: 'https://unioo.io' },
-  { name: 'Otello',        url: 'https://otello.dk' },
-  { name: 'Rema 1000',     url: 'https://www.rema1000.dk/stores/871' },
-  { name: '2M Auto',       url: 'https://www.2m-auto.dk/' }
+  { name: 'Shell Biogas',     url: 'https://www.shell.dk/biogas', logo: 'logos/shell-biogas.png' },
+  { name: '2M Auto',          url: 'https://www.2m-auto.dk/',  logo: 'logos/2m-auto.png' },
+  { name: 'Unioo',            url: 'https://unioo.io',         logo: 'logos/unioo.png' },
+  { name: 'Murer Klemmesen',  url: '#',                        logo: 'logos/murer-klemmesen.png' }
 ];
 
 // Gemte logoer (base64) – deles på tværs af alle sponsorblokke
@@ -1201,10 +1211,16 @@ function buildSponsorLogos() {
       nameSpan.textContent = sp.name;
       link.appendChild(nameSpan);
 
-      if (sponsorLogos[idx]) {
+      var logoSrc = sponsorLogos[idx] || sp.logo;
+      if (logoSrc) {
         var img = document.createElement('img');
-        img.src = sponsorLogos[idx];
+        img.src = logoSrc;
         img.alt = sp.name + ' logo';
+        // Hvis logo-filen mangler, vis sponsornavnet som tekst i stedet
+        img.onerror = function() {
+          link.classList.remove('has-logo');
+          img.remove();
+        };
         link.appendChild(img);
         link.classList.add('has-logo');
       }
